@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <form onsubmit="event.preventDefault(); return  submitFunction()">
+      <label for="choice">Please enter your weapon of choice</label>
+      <input
+        id="userChoice"
+        type="text"
+        placeholder="rock, paper or  scissors"
+        value=""
+      />
+      <button type="submit">Attack!</button>
+    </form>
+
+    <script>
+      let computerPlay = () => {
+        let rps = ["Rock", "Paper", "Scissors"];
+        let x = Math.floor(Math.random() * 3);
+        let output = rps[x];
+        console.log(output);
+        return output;
+      };
+
+      //   let playerSelection;
+      //   const submitFunction = (e) => {
+      //     playerSelection = document.getElementById("userChoice").value;
+      //     console.log(playRound(playerSelection));
+      //   };
+
+      const choices = {
+        ROCK: "rock",
+        PAPER: "paper",
+        SCISSORS: "scissors",
+      };
+
+      const playRound = () => {
+        let playerSelection = prompt("Rock, paper or scissors?");
+        let computerSelection = computerPlay().toLowerCase();
+        playerSelection = playerSelection.toLowerCase();
+
+        console.log("userWin", userWin);
+        console.log("computerWin", computerWin);
+
+        switch (playerSelection) {
+          case choices.ROCK:
+            if (computerSelection === "paper") {
+              computerWin = computerWin + 1;
+              return "You Lose! Paper beats Rock";
+            } else if (computerSelection === playerSelection) {
+              return "You Draw";
+            }
+            userWin = userWin + 1;
+            return "You win!";
+
+          case choices.PAPER:
+            if (computerSelection === "scissors") {
+              computerWin = computerWin + 1;
+              return "You Lose! Scissors beats Paper";
+            } else if (computerSelection === playerSelection) {
+              return "You Draw";
+            }
+            userWin = userWin + 1;
+            return "You win!";
+
+          case choices.SCISSORS:
+            if (computerSelection === "rock") {
+              computerWin = computerWin + 1;
+              return "You Lose! Rock beats Scissors";
+            } else if (computerSelection === playerSelection) {
+              return "You Draw";
+            }
+            userWin = userWin + 1;
+            return "You win boi!";
+        }
+      };
+      let userWin = 0;
+      let computerWin = 0;
+      const game = () => {
+        for (i = 0; i < 5; i++) {
+          playRound();
+          //   console.log("userWin", userWin);
+          //   console.log("computerWin", computerWin);
+        }
+        if (userWin > computerWin) {
+          return "You win!!";
+        }
+        return userWin === computerWin ? "You draw" : "Loser";
+      };
+
+      console.log(game());
+    </script>
+  </body>
+</html>
